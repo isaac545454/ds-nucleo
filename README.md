@@ -1,6 +1,8 @@
 # Nucleus
 
-Design system interno baseado em [shadcn/ui](https://ui.shadcn.com), distribuído como um único pacote versionado.
+Design system interno baseado em [shadcn/ui](https://ui.shadcn.com), distribuído como **um único pacote versionado**.
+
+25 componentes, tokens de tema light/dark e Storybook com documentação viva.
 
 ## Instalação
 
@@ -16,9 +18,10 @@ npm install @isaac/nucleus
 import "@isaac/nucleus/styles.css";
 ```
 
-2. Adicione o preset no `tailwind.config.js` do consumidor (necessário apenas se a app também usa Tailwind e quer os mesmos tokens):
+2. Se a app também usa Tailwind, adicione o preset para compartilhar os mesmos tokens:
 
 ```js
+// tailwind.config.js
 import nucleusPreset from "@isaac/nucleus/tailwind-preset";
 
 export default {
@@ -33,24 +36,63 @@ export default {
 ## Uso
 
 ```tsx
-import { Button, Input } from "@isaac/nucleus";
+import { Button, Input, Label, Dialog, DialogContent, DialogTrigger } from "@isaac/nucleus";
 
-export function LoginForm() {
+export function LoginDialog() {
   return (
-    <form>
-      <Input placeholder="E-mail" type="email" />
-      <Button type="submit">Entrar</Button>
-    </form>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>Entrar</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <Label htmlFor="email">E-mail</Label>
+        <Input id="email" type="email" placeholder="voce@empresa.com" />
+        <Button type="submit">Confirmar</Button>
+      </DialogContent>
+    </Dialog>
   );
 }
 ```
+
+## Componentes
+
+| Categoria | Componentes |
+|---|---|
+| Overlays | Dialog, AlertDialog, Sheet, Popover, Tooltip, DropdownMenu |
+| Forms | Button, Input, Textarea, Label, Checkbox, RadioGroup, Switch, Select, Toggle |
+| Layout | Card, Tabs, Accordion, Separator, Table |
+| Feedback | Alert, Badge, Avatar, Progress, Skeleton |
+
+## Storybook
+
+```bash
+npm run storybook          # dev server em http://localhost:6006
+npm run build-storybook    # build estático em storybook-static/
+```
+
+## Adicionando um novo componente
+
+A lib mantém o `components.json`, então o CLI do shadcn funciona dentro dela:
+
+```bash
+npx shadcn@latest add calendar
+```
+
+Depois exporte no barrel:
+
+```ts
+// src/index.ts
+export * from "./components/ui/calendar";
+```
+
+E crie `src/components/ui/calendar.stories.tsx`.
 
 ## Versionamento e release
 
 Fluxo: git tag → CI builda e publica no GitHub Packages.
 
 ```bash
-# 1. Atualize o CHANGELOG.md
+# 1. Atualize o CHANGELOG.md (mova o conteúdo de Unreleased para a nova versão)
 # 2. Suba a versão (cria commit + tag vX.Y.Z)
 npm version minor   # ou patch / major
 
@@ -67,7 +109,15 @@ git push origin main --follow-tags
 ## Desenvolvimento
 
 ```bash
-npm install
-npm run build      # gera dist/ (JS + types + CSS)
-npm run typecheck
+pnpm install
+pnpm run typecheck
+pnpm run build      # gera dist/ (ESM + types + CSS)
+pnpm run storybook
 ```
+
+> **Rede corporativa**: se `npx shadcn` falhar com `unable to get local issuer certificate`,
+> exporte a CA da empresa e aponte o Node para ela:
+> ```bash
+> security find-certificate -a -p /Library/Keychains/System.keychain > ~/.certs/corp-ca.pem
+> export NODE_EXTRA_CA_CERTS=~/.certs/corp-ca.pem
+> ```
