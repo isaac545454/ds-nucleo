@@ -3,3 +3,5 @@ dist/
 storybook-static/
 *.tgz
 .DS_Store
+coverage
+git-user.local.md
