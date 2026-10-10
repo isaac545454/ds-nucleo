@@ -7,6 +7,8 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-10
+
 ### Added
 
 - Componente `Slider` para valor único ou intervalo (`min`, `max`, `step`, orientação horizontal ou vertical).
@@ -22,6 +24,7 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 ### Changed
 
+- Pacote publicado como `@isaac545454/nucleus`. O escopo precisa ser o owner do GitHub Packages.
 - Componentes movidos de `src/components/` para `src/components/ui/` (padrão shadcn).
 - Tokens de tema completos (`card`, `popover`, `ring`, `radius`) adicionados ao preset e ao `styles.css`.
 
@@ -33,4 +36,4 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 - Componente `Input`.
 - Utilitário `cn` (clsx + tailwind-merge).
 - Design tokens via CSS variables (light/dark) em `styles.css`.
-- Tailwind preset exportado em `@isaac/nucleus/tailwind-preset`.
+- Tailwind preset exportado em `@isaac545454/nucleus/tailwind-preset`.

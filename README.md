@@ -7,7 +7,7 @@ Design system interno baseado em [shadcn/ui](https://ui.shadcn.com), distribuíd
 ## Instalação
 
 ```bash
-npm install @isaac/nucleus
+npm install @isaac545454/nucleus
 ```
 
 ## Setup no projeto consumidor
@@ -15,20 +15,20 @@ npm install @isaac/nucleus
 1. Importe os estilos (uma vez, no entry da app):
 
 ```ts
-import "@isaac/nucleus/styles.css";
+import "@isaac545454/nucleus/styles.css";
 ```
 
 2. Se a app também usa Tailwind, adicione o preset para compartilhar os mesmos tokens:
 
 ```js
 // tailwind.config.js
-import nucleusPreset from "@isaac/nucleus/tailwind-preset";
+import nucleusPreset from "@isaac545454/nucleus/tailwind-preset";
 
 export default {
   presets: [nucleusPreset],
   content: [
     "./src/**/*.{ts,tsx}",
-    "./node_modules/@isaac/nucleus/dist/**/*.js",
+    "./node_modules/@isaac545454/nucleus/dist/**/*.js",
   ],
 };
 ```
@@ -36,7 +36,7 @@ export default {
 ## Uso
 
 ```tsx
-import { Button, Input, Label, Dialog, DialogContent, DialogTrigger } from "@isaac/nucleus";
+import { Button, Input, Label, Dialog, DialogContent, DialogTrigger } from "@isaac545454/nucleus";
 
 export function LoginDialog() {
   return (
@@ -89,15 +89,13 @@ E crie `src/components/ui/calendar.stories.tsx`.
 
 ## Versionamento e release
 
-Fluxo: git tag → CI builda e publica no GitHub Packages.
+Fluxo: merge em `master` → CI publica no GitHub Packages e abre a GitHub Release da versão que está no `package.json`, se essa tag ainda não existir.
 
 ```bash
-# 1. Atualize o CHANGELOG.md (mova o conteúdo de Unreleased para a nova versão)
-# 2. Suba a versão (cria commit + tag vX.Y.Z)
-npm version minor   # ou patch / major
-
-# 3. Push com tags — CI publica automaticamente
-git push origin main --follow-tags
+# 1. Mova o conteúdo de Unreleased no CHANGELOG.md para a nova versão
+# 2. Suba a versão no package.json (sem criar tag; o CI cria)
+#    patch = fix, minor = componente novo, major = breaking change
+# 3. Merge em master
 ```
 
 | Mudança | Versão |
