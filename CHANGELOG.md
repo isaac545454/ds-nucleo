@@ -9,9 +9,10 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 ### Added
 
-- 25 componentes gerados via shadcn CLI (`style: new-york`, `baseColor: zinc`):
+- Componente `Slider` para valor único ou intervalo (`min`, `max`, `step`, orientação horizontal ou vertical).
+- 26 componentes gerados via shadcn CLI (`style: new-york`, `baseColor: zinc`):
   - **Overlays**: Dialog, AlertDialog, Sheet, Popover, Tooltip, DropdownMenu
-  - **Forms**: Button, Input, Textarea, Label, Checkbox, RadioGroup, Switch, Select, Toggle
+  - **Forms**: Button, Input, Textarea, Label, Checkbox, RadioGroup, Switch, Select, Toggle, Slider
   - **Layout**: Card, Tabs, Accordion, Separator, Table
   - **Feedback**: Alert, Badge, Avatar, Progress, Skeleton
 - Storybook 10 (`@storybook/react-vite`) com stories para todos os componentes,
