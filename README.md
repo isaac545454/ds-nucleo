@@ -2,7 +2,7 @@
 
 Design system interno baseado em [shadcn/ui](https://ui.shadcn.com), distribuído como **um único pacote versionado**.
 
-25 componentes, tokens de tema light/dark e Storybook com documentação viva.
+26 componentes, tokens de tema light/dark e Storybook com documentação viva.
 
 ## Instalação
 
@@ -59,7 +59,7 @@ export function LoginDialog() {
 | Categoria | Componentes |
 |---|---|
 | Overlays | Dialog, AlertDialog, Sheet, Popover, Tooltip, DropdownMenu |
-| Forms | Button, Input, Textarea, Label, Checkbox, RadioGroup, Switch, Select, Toggle |
+| Forms | Button, Input, Textarea, Label, Checkbox, RadioGroup, Switch, Select, Toggle, Slider |
 | Layout | Card, Tabs, Accordion, Separator, Table |
 | Feedback | Alert, Badge, Avatar, Progress, Skeleton |
 
