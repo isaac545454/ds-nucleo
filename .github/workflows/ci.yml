@@ -19,6 +19,11 @@ jobs:
           cache: pnpm
 
       - run: pnpm install --frozen-lockfile
+      - name: Exigir entrada no changelog
+        if: github.event_name == 'pull_request'
+        run: |
+          git fetch origin "${{ github.base_ref }}" --depth=1
+          node scripts/check-unreleased.mjs "origin/${{ github.base_ref }}"
       - run: pnpm run typecheck
       - run: pnpm run build
       - run: pnpm run build-storybook
