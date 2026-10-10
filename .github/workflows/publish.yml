@@ -2,11 +2,11 @@ name: Publish
 
 on:
   push:
-    tags:
-      - "v*"
+    branches: [master]
+    tags: ["v*"]
 
 permissions:
-  contents: read
+  contents: write
   packages: write
 
 jobs:
@@ -24,9 +24,27 @@ jobs:
           registry-url: https://npm.pkg.github.com
 
       - run: pnpm install --frozen-lockfile
+      - run: pnpm test
       - run: pnpm run typecheck
       - run: pnpm run build
 
-      - run: pnpm publish --no-git-checks
+      - name: Publicar pacote e criar GitHub Release
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          name="$(node -p "require('./package.json').name")"
+          tag="v${version}"
+
+          if gh release view "$tag" >/dev/null 2>&1; then
+            echo "Release ${tag} já existe."
+            exit 0
+          fi
+
+          if ! npm view "${name}@${version}" version --registry https://npm.pkg.github.com >/dev/null 2>&1; then
+            pnpm publish --no-git-checks
+          fi
+
+          notes="$(node scripts/release-notes.mjs "$version")"
+          gh release create "$tag" --target "$GITHUB_SHA" --title "$tag" --notes "$notes"
