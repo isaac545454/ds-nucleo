@@ -89,20 +89,19 @@ E crie `src/components/ui/calendar.stories.tsx`.
 
 ## Versionamento e release
 
-Fluxo: merge em `master` → CI publica no GitHub Packages e abre a GitHub Release da versão que está no `package.json`, se essa tag ainda não existir.
+Cada PR adiciona uma entrada em `## [Unreleased]` no `CHANGELOG.md`. O CI recusa o PR sem uma entrada nova nessa seção.
 
-```bash
-# 1. Mova o conteúdo de Unreleased no CHANGELOG.md para a nova versão
-# 2. Suba a versão no package.json (sem criar tag; o CI cria)
-#    patch = fix, minor = componente novo, major = breaking change
-# 3. Merge em master
-```
+No merge em `master`, o workflow:
+
+1. Lê os commits desde a última tag (`feat` = minor, `fix` = patch, breaking = major).
+2. Move o `Unreleased` para `## [x.y.z] - data`, sobe `package.json` e commita.
+3. Publica no GitHub Packages e abre a GitHub Release com essas notas.
 
 | Mudança | Versão |
 |---|---|
-| Fix em componente existente | patch (0.1.1) |
-| Novo componente / variant | minor (0.2.0) |
-| Breaking change (prop removida, rename) | major (1.0.0) |
+| Fix em componente existente | patch (0.2.1) |
+| Novo componente / variant (`feat`) | minor (0.3.0) |
+| Breaking change (`feat!` ou `BREAKING CHANGE`) | major (1.0.0) |
 
 ## Desenvolvimento
 

@@ -14,6 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
 
       - uses: pnpm/action-setup@v4
 
@@ -28,12 +31,26 @@ jobs:
       - run: pnpm run typecheck
       - run: pnpm run build
 
+      - name: Cortar versão a partir do Unreleased
+        id: cut
+        run: node scripts/release-cut.mjs
+
+      - name: Commit da versão
+        if: steps.cut.outputs.commit == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add CHANGELOG.md package.json
+          git commit -m "chore: release v${{ steps.cut.outputs.version }}"
+          git push origin HEAD:master
+
       - name: Publicar pacote e criar GitHub Release
+        if: steps.cut.outputs.released == 'true'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          version="$(node -p "require('./package.json').version")"
+          version="${{ steps.cut.outputs.version }}"
           name="$(node -p "require('./package.json').name")"
           tag="v${version}"
 
@@ -47,4 +64,4 @@ jobs:
           fi
 
           notes="$(node scripts/release-notes.mjs "$version")"
-          gh release create "$tag" --target "$GITHUB_SHA" --title "$tag" --notes "$notes"
+          gh release create "$tag" --target "$(git rev-parse HEAD)" --title "$tag" --notes "$notes"
