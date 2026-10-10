@@ -11,6 +11,10 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 - Componente `ScrollArea` para conteúdo com overflow e barra de rolagem vertical ou horizontal.
 
+### Changed
+
+- Merge em `master` corta a versão a partir de `Unreleased`, publica o pacote e abre a GitHub Release. A release deixava de sair quando `package.json` continuava na versão já publicada.
+
 ## [0.2.0] - 2026-10-10
 
 ### Added
