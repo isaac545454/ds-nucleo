@@ -6,22 +6,11 @@ on:
     branches: [master, main]
 
 jobs:
-  verify:
+  changelog:
+    name: Changelog
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - uses: pnpm/action-setup@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
-
-      - name: Instalar dependências
-        run: pnpm install --frozen-lockfile
 
       - name: Exigir entrada no changelog
         if: github.event_name == 'pull_request'
@@ -29,22 +18,67 @@ jobs:
           git fetch origin "${{ github.base_ref }}" --depth=1
           node scripts/check-unreleased.mjs "origin/${{ github.base_ref }}"
 
+  lint:
+    name: Lint
+    needs: changelog
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
       - name: Lint
         run: pnpm run lint
 
+  typecheck:
+    name: Typecheck
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
       - name: Typecheck
         run: pnpm run typecheck
 
+  test:
+    name: Testes unitários
+    needs: typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
       - name: Testes unitários
         run: pnpm test
 
+  build:
+    name: Build
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
       - name: Build
         run: pnpm run build
 
+  storybook:
+    name: Storybook
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
       - name: Build do Storybook
         run: pnpm run build-storybook
 
-      - name: Chromatic
-        uses: chromaui/action@v18
+  chromatic:
+    name: Chromatic
+    needs: storybook
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
         with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+      # Pausado temporariamente.
+      # - name: Chromatic
+      #   uses: chromaui/action@v18
+      #   with:
+      #     projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}

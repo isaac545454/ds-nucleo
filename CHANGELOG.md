@@ -11,6 +11,13 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 - `Badge` fica em pílula, maior e com anel vermelho. PR de teste do Chromatic: os snapshots devem divergir. Não mergear.
 
+## [0.5.3] - 2026-10-12
+
+### Changed
+
+- Lint, typecheck, testes, build, Storybook e Chromatic passam a ser checks separados e rodam em sequência. O Chromatic continua por último.
+- O step do Chromatic no CI fica comentado temporariamente.
+
 ## [0.5.2] - 2026-10-12
 
 ### Added
