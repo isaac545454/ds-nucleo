@@ -7,6 +7,8 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+## [0.5.2] - 2026-10-12
+
 ### Added
 
 - Relatório de tree-shaking nos pull requests. O CI mede o bundle de cada export e falha se um export que já existia crescer mais de 20% e mais de 256 B, ou se o conjunto dos exports antigos crescer mais de 5%. A label `tree-shaking: accepted` aceita um aumento intencional.
