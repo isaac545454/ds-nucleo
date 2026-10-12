@@ -34,7 +34,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => (
-    <DropdownMenu>
+    <DropdownMenu defaultOpen>
       <DropdownMenuTrigger asChild>
         <Button variant="outline">Minha conta</Button>
       </DropdownMenuTrigger>
@@ -79,7 +79,7 @@ function ColumnsMenu() {
   const [showCreatedAt, setShowCreatedAt] = React.useState(true);
 
   return (
-    <DropdownMenu>
+    <DropdownMenu defaultOpen>
       <DropdownMenuTrigger asChild>
         <Button variant="outline">Colunas visíveis</Button>
       </DropdownMenuTrigger>
@@ -117,7 +117,7 @@ function SortMenu() {
   const [order, setOrder] = React.useState("recent");
 
   return (
-    <DropdownMenu>
+    <DropdownMenu defaultOpen>
       <DropdownMenuTrigger asChild>
         <Button variant="outline">Ordenar por</Button>
       </DropdownMenuTrigger>
@@ -146,7 +146,7 @@ export const WithRadioItems: Story = {
 
 export const WithSubmenu: Story = {
   render: () => (
-    <DropdownMenu>
+    <DropdownMenu defaultOpen>
       <DropdownMenuTrigger asChild>
         <Button variant="outline">Ações</Button>
       </DropdownMenuTrigger>
@@ -155,7 +155,7 @@ export const WithSubmenu: Story = {
         <DropdownMenuSeparator />
         <DropdownMenuItem>Ver detalhes</DropdownMenuItem>
         <DropdownMenuItem>Duplicar</DropdownMenuItem>
-        <DropdownMenuSub>
+        <DropdownMenuSub defaultOpen>
           <DropdownMenuSubTrigger>
             <UserPlus />
             Compartilhar

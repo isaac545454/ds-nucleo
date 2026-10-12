@@ -33,7 +33,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: (args) => (
-    <Select {...args}>
+    <Select {...args} defaultOpen>
       <SelectTrigger className="w-64">
         <SelectValue placeholder="Selecione um estado" />
       </SelectTrigger>
@@ -52,7 +52,7 @@ export const WithLabel: Story = {
   render: (args) => (
     <div className="grid w-64 gap-2">
       <Label htmlFor="select-state">Estado</Label>
-      <Select {...args}>
+      <Select {...args} defaultOpen>
         <SelectTrigger id="select-state">
           <SelectValue placeholder="Selecione um estado" />
         </SelectTrigger>
@@ -70,7 +70,7 @@ export const WithDefaultValue: Story = {
   name: "Com valor inicial",
   args: { defaultValue: "rj" },
   render: (args) => (
-    <Select {...args}>
+    <Select {...args} defaultOpen>
       <SelectTrigger className="w-64">
         <SelectValue placeholder="Selecione um estado" />
       </SelectTrigger>
@@ -86,7 +86,7 @@ export const WithDefaultValue: Story = {
 export const Grouped: Story = {
   name: "Opções agrupadas",
   render: (args) => (
-    <Select {...args}>
+    <Select {...args} defaultOpen>
       <SelectTrigger className="w-64">
         <SelectValue placeholder="Selecione uma cidade" />
       </SelectTrigger>
@@ -112,7 +112,7 @@ export const Grouped: Story = {
 export const WithDisabledItem: Story = {
   name: "Com item desabilitado",
   render: (args) => (
-    <Select {...args}>
+    <Select {...args} defaultOpen>
       <SelectTrigger className="w-64">
         <SelectValue placeholder="Selecione um plano" />
       </SelectTrigger>

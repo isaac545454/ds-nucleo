@@ -35,7 +35,8 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "chromatic"
   },
   "peerDependencies": {
     "react": ">=18",
@@ -80,6 +81,7 @@
     "@vitejs/plugin-react": "^6.1.2",
     "@vitest/coverage-v8": "^5.0.3",
     "autoprefixer": "^10.6.1",
+    "chromatic": "^18.12.0",
     "jsdom": "^30.1.2",
     "postcss": "^8.5.29",
     "react": "^18.3.1",
