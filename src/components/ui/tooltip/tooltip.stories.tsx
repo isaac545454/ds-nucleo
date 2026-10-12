@@ -23,7 +23,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => (
     <TooltipProvider>
-      <Tooltip>
+      <Tooltip defaultOpen>
         <TooltipTrigger asChild>
           <Button variant="outline">Passe o mouse aqui</Button>
         </TooltipTrigger>
@@ -39,7 +39,7 @@ export const OnIconButtons: Story = {
   render: () => (
     <TooltipProvider delayDuration={200}>
       <div className="flex items-center gap-2">
-        <Tooltip>
+        <Tooltip defaultOpen>
           <TooltipTrigger asChild>
             <Button variant="outline" size="icon" aria-label="Adicionar aluno">
               <Plus className="h-4 w-4" />
@@ -80,19 +80,31 @@ export const OnIconButtons: Story = {
 
 export const Sides: Story = {
   render: () => (
-    <TooltipProvider delayDuration={100}>
-      <div className="grid grid-cols-2 gap-4">
-        {(["top", "right", "bottom", "left"] as const).map((side) => (
-          <Tooltip key={side}>
-            <TooltipTrigger asChild>
-              <Button variant="outline">{side}</Button>
-            </TooltipTrigger>
-            <TooltipContent side={side}>
-              <p>Dica exibida à {side}</p>
-            </TooltipContent>
-          </Tooltip>
-        ))}
-      </div>
-    </TooltipProvider>
+    <div className="grid h-[360px] w-[520px] grid-cols-3 grid-rows-3 place-items-center">
+      <div />
+      <SideTooltip side="top" />
+      <div />
+      <SideTooltip side="left" />
+      <div />
+      <SideTooltip side="right" />
+      <div />
+      <SideTooltip side="bottom" />
+      <div />
+    </div>
   ),
 };
+
+function SideTooltip({ side }: { side: "top" | "right" | "bottom" | "left" }) {
+  return (
+    <TooltipProvider>
+      <Tooltip defaultOpen>
+        <TooltipTrigger asChild>
+          <Button variant="outline">{side}</Button>
+        </TooltipTrigger>
+        <TooltipContent side={side}>
+          <p>Dica exibida à {side}</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  );
+}

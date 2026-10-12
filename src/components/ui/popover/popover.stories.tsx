@@ -19,7 +19,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => (
-    <Popover>
+    <Popover defaultOpen>
       <PopoverTrigger asChild>
         <Button variant="outline">Abrir popover</Button>
       </PopoverTrigger>
@@ -38,7 +38,7 @@ export const Default: Story = {
 
 export const WithForm: Story = {
   render: () => (
-    <Popover>
+    <Popover defaultOpen>
       <PopoverTrigger asChild>
         <Button variant="outline">
           <Settings2 className="mr-2 h-4 w-4" />
@@ -71,7 +71,7 @@ export const WithForm: Story = {
 
 export const AlignedStart: Story = {
   render: () => (
-    <Popover>
+    <Popover defaultOpen>
       <PopoverTrigger asChild>
         <Button variant="secondary">Ações rápidas</Button>
       </PopoverTrigger>

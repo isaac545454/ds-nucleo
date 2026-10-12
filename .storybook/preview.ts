@@ -1,6 +1,7 @@
 import type { Preview } from "@storybook/react-vite";
 
 import "../src/styles.css";
+import { allModes } from "./modes";
 
 const preview: Preview = {
   parameters: {
@@ -11,6 +12,13 @@ const preview: Preview = {
       },
     },
     backgrounds: { disable: true },
+    chromatic: {
+      modes: {
+        light: allModes.light,
+        dark: allModes.dark,
+      },
+      pauseAnimationAtEnd: true,
+    },
   },
   globalTypes: {
     theme: {

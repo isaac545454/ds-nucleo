@@ -1,6 +1,6 @@
 {
   "name": "@isaac545454/nucleus",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Design system interno, baseado em shadcn/ui, publicado como pacote único.",
   "license": "UNLICENSED",
   "repository": {
@@ -36,7 +36,8 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "chromatic"
   },
   "peerDependencies": {
     "react": ">=18",
@@ -82,6 +83,7 @@
     "@vitejs/plugin-react": "^6.1.2",
     "@vitest/coverage-v8": "^5.0.3",
     "autoprefixer": "^10.6.1",
+    "chromatic": "^18.12.0",
     "eslint": "^10.12.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "jsdom": "^30.1.2",
