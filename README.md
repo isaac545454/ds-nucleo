@@ -60,7 +60,7 @@ export function LoginDialog() {
 |---|---|
 | Overlays | Dialog, AlertDialog, Sheet, Popover, Tooltip, DropdownMenu |
 | Forms | Button, Input, Textarea, Label, Checkbox, RadioGroup, Switch, Select, Toggle, Slider |
-| Layout | Card, Tabs, Accordion, Separator, ScrollArea, Table |
+| Layout | Card, Tabs, Accordion, Separator, ScrollArea, Table, Breadcrumb |
 | Feedback | Alert, Badge, Avatar, Progress, Skeleton, Kbd |
 
 ## Storybook
