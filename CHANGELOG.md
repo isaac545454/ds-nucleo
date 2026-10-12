@@ -7,6 +7,11 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+### Added
+
+- Convenção para agentes em `AGENTS.md` (import, tokens, overlays). O catálogo não é copiado para a rule.
+- MCP do Storybook (`@storybook/addon-mcp`) com manifesto de componentes. O toolset de teste fica desligado. No CI, o Chromatic publica esse catálogo em `/mcp`. Ver `docs/ai-rules-vs-mcp.md`.
+
 ## [0.5.3] - 2026-10-12
 
 ### Changed
