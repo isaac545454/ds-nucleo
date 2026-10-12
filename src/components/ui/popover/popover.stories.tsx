@@ -23,9 +23,11 @@ export const Default: Story = {
       <PopoverTrigger asChild>
         <Button variant="outline">Abrir popover</Button>
       </PopoverTrigger>
-      <PopoverContent>
+      <PopoverContent aria-labelledby="popover-about-title">
         <div className="grid gap-2">
-          <h4 className="text-sm font-semibold">Sobre este campo</h4>
+          <h4 id="popover-about-title" className="text-sm font-semibold">
+            Sobre este campo
+          </h4>
           <p className="text-sm text-muted-foreground">
             O código de matrícula é gerado automaticamente quando o aluno é
             cadastrado e não pode ser alterado.
@@ -45,10 +47,15 @@ export const WithForm: Story = {
           Dimensões
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-80">
+      <PopoverContent
+        className="w-80"
+        aria-labelledby="popover-dimensions-title"
+      >
         <div className="grid gap-4">
           <div className="grid gap-1">
-            <h4 className="text-sm font-semibold">Dimensões</h4>
+            <h4 id="popover-dimensions-title" className="text-sm font-semibold">
+              Dimensões
+            </h4>
             <p className="text-sm text-muted-foreground">
               Defina o tamanho da área de impressão.
             </p>
@@ -75,7 +82,7 @@ export const AlignedStart: Story = {
       <PopoverTrigger asChild>
         <Button variant="secondary">Ações rápidas</Button>
       </PopoverTrigger>
-      <PopoverContent align="start" className="w-56">
+      <PopoverContent align="start" className="w-56" aria-label="Ações rápidas">
         <div className="grid gap-1 text-sm">
           <button className="rounded-sm px-2 py-1.5 text-left hover:bg-accent">
             Duplicar registro
