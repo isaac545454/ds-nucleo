@@ -107,7 +107,9 @@ No merge em `master`, o workflow:
 
 ```bash
 pnpm install
+pnpm run lint
 pnpm run typecheck
+pnpm test
 pnpm run build      # gera dist/ (ESM + types + CSS)
 pnpm run storybook
 ```

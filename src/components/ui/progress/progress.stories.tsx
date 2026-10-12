@@ -33,28 +33,30 @@ export const Default: Story = {
   ),
 };
 
-export const Animated: Story = {
-  render: () => {
-    const [value, setValue] = React.useState(10);
+function AnimatedProgress() {
+  const [value, setValue] = React.useState(10);
 
-    React.useEffect(() => {
-      const interval = window.setInterval(() => {
-        setValue((current) => (current >= 100 ? 0 : current + 5));
-      }, 400);
+  React.useEffect(() => {
+    const interval = window.setInterval(() => {
+      setValue((current) => (current >= 100 ? 0 : current + 5));
+    }, 400);
 
-      return () => window.clearInterval(interval);
-    }, []);
+    return () => window.clearInterval(interval);
+  }, []);
 
-    return (
-      <div className="w-80 space-y-2">
-        <div className="flex items-center justify-between text-sm">
-          <span className="text-muted-foreground">Processando importação</span>
-          <span>{value}%</span>
-        </div>
-        <Progress value={value} />
+  return (
+    <div className="w-80 space-y-2">
+      <div className="flex items-center justify-between text-sm">
+        <span className="text-muted-foreground">Processando importação</span>
+        <span>{value}%</span>
       </div>
-    );
-  },
+      <Progress value={value} />
+    </div>
+  );
+}
+
+export const Animated: Story = {
+  render: () => <AnimatedProgress />,
 };
 
 export const Steps: Story = {

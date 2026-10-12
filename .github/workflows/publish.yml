@@ -26,10 +26,20 @@ jobs:
           cache: pnpm
           registry-url: https://npm.pkg.github.com
 
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm test
-      - run: pnpm run typecheck
-      - run: pnpm run build
+      - name: Instalar dependências
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Testes unitários
+        run: pnpm test
+
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      - name: Build
+        run: pnpm run build
 
       - name: Cortar versão a partir do Unreleased
         id: cut
