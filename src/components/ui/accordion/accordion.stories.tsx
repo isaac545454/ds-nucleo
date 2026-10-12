@@ -19,7 +19,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Single: Story = {
-  args: { type: "single", collapsible: true },
+  args: { type: "single", collapsible: true, defaultValue: "payment" },
   render: (args) => (
     <Accordion {...args} className="w-[420px]">
       <AccordionItem value="payment">

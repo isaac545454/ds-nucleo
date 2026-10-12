@@ -27,7 +27,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => (
-    <Dialog>
+    <Dialog defaultOpen>
       <DialogTrigger asChild>
         <Button variant="outline">Abrir detalhes</Button>
       </DialogTrigger>
@@ -66,7 +66,7 @@ export const Default: Story = {
 
 export const WithForm: Story = {
   render: () => (
-    <Dialog>
+    <Dialog defaultOpen>
       <DialogTrigger asChild>
         <Button>Editar perfil</Button>
       </DialogTrigger>
@@ -100,7 +100,7 @@ export const WithForm: Story = {
 
 export const DestructiveConfirmation: Story = {
   render: () => (
-    <Dialog>
+    <Dialog defaultOpen>
       <DialogTrigger asChild>
         <Button variant="destructive">Remover integração</Button>
       </DialogTrigger>

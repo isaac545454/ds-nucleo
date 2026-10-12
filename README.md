@@ -70,6 +70,18 @@ npm run storybook          # dev server em http://localhost:6006
 npm run build-storybook    # build estático em storybook-static/
 ```
 
+## Chromatic
+
+Cada story vira um teste visual, fotografado nos temas light e dark. No CI, o workflow compara o snapshot com a baseline e só aceita mudanças em `master` automaticamente.
+
+1. Crie o projeto em [chromatic.com](https://www.chromatic.com) apontando para este repositório.
+2. Adicione o token do projeto como secret `CHROMATIC_PROJECT_TOKEN`.
+3. Rode localmente com o token no ambiente:
+
+```bash
+CHROMATIC_PROJECT_TOKEN=<token> pnpm chromatic
+```
+
 ## Adicionando um novo componente
 
 A lib mantém o `components.json`, então o CLI do shadcn funciona dentro dela:

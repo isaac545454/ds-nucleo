@@ -7,6 +7,14 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+### Added
+
+- Testes visuais no Chromatic. Cada story é fotografada nos temas light e dark, e overlays abrem no estado inicial para o snapshot incluir o conteúdo.
+
+### Fixed
+
+- Tokens do tema dark deixavam de ir para o CSS. O Tailwind removia o bloco `.dark` no build, então a classe no `html` não trocava as cores.
+
 ## [0.3.0] - 2026-10-10
 
 ### Added
