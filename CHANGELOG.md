@@ -7,6 +7,8 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+## [0.6.1] - 2026-10-12
+
 ### Added
 
 - Página de cores no Storybook, com nome da cor, hexadecimal e uso na interface nos temas claro e escuro.
