@@ -9,6 +9,7 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 ### Changed
 
+- `Badge` deixa de aplicar a variante visual. PR de teste do CI: os testes unitários devem falhar.
 - O CI passa a rodar lint, testes unitários e build em cada pull request e antes de publicar.
 
 ## [0.4.0] - 2026-10-12
