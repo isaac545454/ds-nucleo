@@ -15,6 +15,12 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 - O JavaScript publicado deixa de ser um arquivo único. Cada módulo sai separado, com `sideEffects` só no CSS, para o bundler de quem consome descartar o componente que não foi importado.
 
+## [0.5.1] - 2026-10-12
+
+### Changed
+
+- O Chromatic roda como último step do CI, depois do lint, dos testes e do build do Storybook.
+
 ## [0.5.0] - 2026-10-12
 
 ### Added
