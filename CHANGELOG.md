@@ -11,6 +11,8 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 - Componente `Kbd` para mostrar teclas e atalhos.
 
+## [0.4.1] - 2026-10-12
+
 ### Changed
 
 - O CI passa a rodar lint, testes unitários e build em cada pull request e antes de publicar.
