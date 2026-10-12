@@ -32,6 +32,7 @@ export * from "./components/ui/badge";
 export * from "./components/ui/avatar";
 export * from "./components/ui/progress";
 export * from "./components/ui/skeleton";
+export * from "./components/ui/kbd";
 
 // Utils
 export { cn } from "./lib/utils";

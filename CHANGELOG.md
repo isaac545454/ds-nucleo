@@ -11,6 +11,12 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 - `Badge` deixa de aplicar a variante visual. PR de teste do CI: os testes unitários devem falhar.
 
+## [0.5.0] - 2026-10-12
+
+### Added
+
+- Componente `Kbd` para mostrar teclas e atalhos.
+
 ## [0.4.1] - 2026-10-12
 
 ### Changed
