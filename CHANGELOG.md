@@ -7,6 +7,8 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-10-12
+
 ### Added
 
 - Convenção para agentes em `AGENTS.md` (import, tokens, overlays). O catálogo não é copiado para a rule.
