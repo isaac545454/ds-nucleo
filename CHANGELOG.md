@@ -7,6 +7,8 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+## [0.4.1] - 2026-10-12
+
 ### Changed
 
 - `Badge` deixa de aplicar a variante visual. PR de teste do CI: os testes unitários devem falhar.
