@@ -7,6 +7,8 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+## [0.5.1] - 2026-10-12
+
 ### Changed
 
 - O Chromatic roda como último step do CI, depois do lint, dos testes e do build do Storybook.
