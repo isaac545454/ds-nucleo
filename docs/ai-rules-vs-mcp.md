@@ -29,9 +29,9 @@ O addon oficial é [`@storybook/addon-mcp`](https://storybook.js.org/docs/ai/mcp
 
 Três toolsets, papéis diferentes:
 
-- **docs** (`docs-list`, `docs-show`, `docs-show-story`) lê o manifesto de componentes. É o que o consumidor precisa. No React ele existe quando `features.componentsManifest` está ligado. Hoje está desligado em `.storybook/main.ts`.
-- **dev** (`get-storybook-story-instructions`, `stories-preview`, e outros) serve para quem escreve story neste repositório. Não ajuda a app que só instala o pacote.
-- **test** (`test-run`) exige `@storybook/addon-vitest`, que este repo não tem. Fica de fora.
+- **docs** (`docs-list`, `docs-show`, `docs-show-story`) lê o manifesto de componentes. É o que o consumidor precisa. No React ele existe quando `features.componentsManifest` está ligado. Está ligado em `.storybook/main.ts`, junto com o addon.
+- **dev** (`get-storybook-story-instructions`, `stories-preview`, e outros) serve para quem escreve story neste repositório, com o Storybook local no ar. Não ajuda a app que só instala o pacote. No Chromatic esse toolset não é publicado.
+- **test** (`test-run`) exige `@storybook/addon-vitest`, que este repo não tem. O addon está registrado com `toolsets.test: false`.
 
 O servidor local sobe junto com `pnpm run storybook`, em `http://localhost:6006/mcp`. Isso só existe para quem está com este repo aberto.
 
@@ -39,30 +39,25 @@ Para quem consome o pacote, a documentação do Storybook separa o toolset de do
 
 `@storybook/mcp@10.6.1` existe para self-host a partir de `components.json` / `docs.json`. Não vale a pena enquanto o Chromatic já publica o Storybook.
 
-O `AGENTS.md` não entra no `files` do `package.json`. Instalar `@isaac545454/nucleus` não entrega a rule. O consumidor cola o bloco de convenção no `AGENTS.md` da app dele e aponta o agente para a URL publicada do MCP. A URL ainda não existe: o manifesto não está ligado e o `chromatic.config.json` não guarda o id do projeto.
+O `AGENTS.md` não entra no `files` do `package.json`. Instalar `@isaac545454/nucleus` não entrega a rule. O consumidor cola o bloco de convenção no `AGENTS.md` da app dele e aponta o agente para a URL publicada do MCP. O `chromatic.config.json` não guarda o id do projeto; a URL sai do publish (`https://<branch>--<appId>.chromatic.com/mcp`) e ainda não está anotada aqui.
 
 ## O que foi verificado
 
 - 28 stories em `src/components/ui/**/*.stories.tsx`, uma por componente exportado em `src/index.ts`, com `tags: ["autodocs"]`. Não há MDX.
-- Não existe `AGENTS.md` nem `.cursor/rules`. O `README.md` tem uma tabela de componentes: é o tipo de catálogo que este spike evita crescer.
+- `AGENTS.md` guarda só convenção. Não há `.cursor/rules`. O `README.md` tem uma tabela de componentes: é o tipo de catálogo que este spike evita copiar para a rule.
 - `Button`: as variants e os sizes de `button.tsx` (`cva`) são os mesmos do `argTypes` da story (`default`, `secondary`, `destructive`, `outline`, `ghost`, `link` e `default`, `sm`, `lg`, `icon`). Uma rule que copiasse essa lista mentiria no próximo variant.
-- `.storybook/main.ts` não registra `@storybook/addon-mcp` e não liga `componentsManifest`.
+- `.storybook/main.ts` registra `@storybook/addon-mcp` com `toolsets.test: false` e liga `features.componentsManifest`. O Cursor deste repo aponta para `http://localhost:6006/mcp` em `.cursor/mcp.json`, que só responde com `pnpm run storybook` no ar.
+- Com o dev server no ar, a página `/mcp` marca docs e dev como enabled e test como disabled. `docs-list` devolve os 28 componentes. `docs-show` de `forms-button` traz as stories, inclusive `variant="destructive"`. A seção Props só lista `asChild`: `variant` e `size` vêm de `VariantProps` do `cva`, e o react-docgen não expande isso. Esses valores ficam nos exemplos das stories.
 - No npm, `@storybook/addon-mcp@10.6.1` declara peer `storybook@^10.6.1`. `@storybook/addon-vitest` é peer opcional. `@storybook/mcp@10.6.1` é o pacote de self-host.
 - O job `chromatic` do CI em `master` publica o Storybook com `CHROMATIC_PROJECT_TOKEN`. É o gancho do MCP remoto. O id do projeto não está no repositório.
 
 ## O que ficou de fora
 
-- Não subimos o Storybook com o addon nem chamamos `docs-list`. A API do MCP ainda está em preview.
-- Não publicamos a URL do MCP no Chromatic. Falta o manifesto e o id do projeto; o token fica no secret do CI.
-- Não ligamos o toolset de teste nem instalamos `@storybook/addon-vitest`.
-- Não fizemos self-host com `@storybook/mcp`.
-- Não colocamos `storybook.url` no `package.json` para composition. Isso pede a URL publicada, que este spike não tem.
+- A URL publicada do MCP. O manifesto entra no build, e o job `chromatic` do CI publica `/mcp`, mas o id do projeto continua só no secret. Sem esse id não dá para escrever a URL neste repo.
+- O toolset de teste e o `@storybook/addon-vitest`.
+- Self-host com `@storybook/mcp`.
+- `storybook.url` no `package.json` para composition. Isso pede a URL publicada.
 
 ## Próximo passo
 
-Quando for ligar o catálogo ao vivo, nesta ordem:
-
-1. Registrar `@storybook/addon-mcp` e `features.componentsManifest: true` em `.storybook/main.ts`.
-2. Deixar o toolset `test` desligado até existir `@storybook/addon-vitest`.
-3. Publicar pelo Chromatic que o CI já roda e anotar a URL do MCP para os consumidores.
-4. No `AGENTS.md` das apps, manter o bloco de convenção e trocar a leitura da story local por `docs-list` / `docs-show`.
+Depois do próximo publish no Chromatic, anotar a URL `https://<branch>--<appId>.chromatic.com/mcp` para quem consome `@isaac545454/nucleus`. No `AGENTS.md` da app, manter o bloco de convenção e apontar o agente para essa URL.

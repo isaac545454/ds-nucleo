@@ -70,7 +70,7 @@ npm run storybook          # dev server em http://localhost:6006
 npm run build-storybook    # build estático em storybook-static/
 ```
 
-Agentes que forem usar o pacote seguem `AGENTS.md` (convenção) e leem o catálogo nas stories. A comparação com o MCP do Storybook está em [`docs/ai-rules-vs-mcp.md`](docs/ai-rules-vs-mcp.md).
+Agentes seguem [`AGENTS.md`](AGENTS.md) para a convenção e o MCP do Storybook para o catálogo. Com o dev server no ar, o endpoint é `http://localhost:6006/mcp` (`docs-list`, `docs-show`, `docs-show-story`). O Chromatic publica o mesmo catálogo em `/mcp`. Detalhe em [`docs/ai-rules-vs-mcp.md`](docs/ai-rules-vs-mcp.md).
 
 ## Chromatic
 

@@ -36,6 +36,8 @@ Formulário: `Label` com `htmlFor` no `id` do controle. Não recrie botão, inpu
 
 ## Catálogo
 
-Antes de passar uma prop ou variant, leia a story em `src/components/ui/<componente>/`. Use só o que a story mostra. Se a prop não está lá, pergunte. Não assuma API de outro design system.
+Não copie a lista de componentes, variants ou args para este arquivo.
 
-Não copie a lista de componentes, variants ou args para este arquivo. Quando o MCP do Storybook estiver publicado, prefira `docs-list`, `docs-show` e `docs-show-story` à leitura do arquivo. O papel de cada um está em `docs/ai-rules-vs-mcp.md`.
+Com `pnpm run storybook` no ar, o catálogo está em `http://localhost:6006/mcp`. Antes de passar uma prop ou variant, use `docs-list`, `docs-show` e `docs-show-story`. Use só o que essas tools devolverem. Se a prop não está lá, pergunte. Não assuma API de outro design system.
+
+Quem consome o pacote sem este repo usa esta mesma convenção e o MCP que o Chromatic publica na rota `/mcp` do Storybook. O id do projeto não está neste repositório. O papel de cada caminho está em `docs/ai-rules-vs-mcp.md`.

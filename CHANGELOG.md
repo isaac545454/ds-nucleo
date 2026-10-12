@@ -9,7 +9,8 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 ### Added
 
-- Recomendação para agentes usarem o Nucleus: convenção em `AGENTS.md` e catálogo nas stories, com o MCP do Storybook como próximo passo. Ver `docs/ai-rules-vs-mcp.md`.
+- Convenção para agentes em `AGENTS.md` (import, tokens, overlays). O catálogo não é copiado para a rule.
+- MCP do Storybook (`@storybook/addon-mcp`) com manifesto de componentes. O toolset de teste fica desligado. No CI, o Chromatic publica esse catálogo em `/mcp`. Ver `docs/ai-rules-vs-mcp.md`.
 
 ## [0.5.3] - 2026-10-12
 
