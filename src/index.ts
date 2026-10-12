@@ -23,6 +23,7 @@ export * from "./components/ui/card";
 export * from "./components/ui/tabs";
 export * from "./components/ui/accordion";
 export * from "./components/ui/separator";
+export * from "./components/ui/breadcrumb";
 export * from "./components/ui/scroll-area";
 export * from "./components/ui/table";
 

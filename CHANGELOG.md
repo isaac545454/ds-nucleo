@@ -7,6 +7,10 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+### Added
+
+- Componente `Breadcrumb` para a trilha de navegação.
+
 ## [0.6.2] - 2026-10-12
 
 ### Added
