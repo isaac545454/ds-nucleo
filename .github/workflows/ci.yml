@@ -46,11 +46,21 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
       - name: Testes unitários
-        run: pnpm test
+        run: pnpm exec vitest run
+
+  a11y:
+    name: Acessibilidade
+    needs: typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: Testes de acessibilidade
+        run: pnpm run test:a11y
 
   build:
     name: Build
-    needs: test
+    needs: [test, a11y]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

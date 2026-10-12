@@ -29,6 +29,7 @@
   "include": [
     "src",
     "vitest.config.ts",
+    "vitest.a11y.config.ts",
     "vitest.setup.ts"
   ]
 }

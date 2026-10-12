@@ -25,10 +25,12 @@ export const Default: Story = {
   render: (args) => (
     <div className="w-80 space-y-2">
       <div className="flex items-center justify-between text-sm">
-        <span className="text-muted-foreground">Enviando arquivos</span>
+        <span id="progress-upload" className="text-muted-foreground">
+          Enviando arquivos
+        </span>
         <span>{args.value ?? 0}%</span>
       </div>
-      <Progress {...args} />
+      <Progress {...args} aria-labelledby="progress-upload" />
     </div>
   ),
 };
@@ -47,10 +49,12 @@ function AnimatedProgress() {
   return (
     <div className="w-80 space-y-2">
       <div className="flex items-center justify-between text-sm">
-        <span className="text-muted-foreground">Processando importação</span>
+        <span id="progress-import" className="text-muted-foreground">
+          Processando importação
+        </span>
         <span>{value}%</span>
       </div>
-      <Progress value={value} />
+      <Progress value={value} aria-labelledby="progress-import" />
     </div>
   );
 }
@@ -63,16 +67,22 @@ export const Steps: Story = {
   render: () => (
     <div className="w-80 space-y-6">
       <div className="space-y-2">
-        <p className="text-sm text-muted-foreground">Não iniciado</p>
-        <Progress value={0} />
+        <p id="progress-idle" className="text-sm text-muted-foreground">
+          Não iniciado
+        </p>
+        <Progress value={0} aria-labelledby="progress-idle" />
       </div>
       <div className="space-y-2">
-        <p className="text-sm text-muted-foreground">Em andamento</p>
-        <Progress value={50} />
+        <p id="progress-running" className="text-sm text-muted-foreground">
+          Em andamento
+        </p>
+        <Progress value={50} aria-labelledby="progress-running" />
       </div>
       <div className="space-y-2">
-        <p className="text-sm text-muted-foreground">Concluído</p>
-        <Progress value={100} />
+        <p id="progress-done" className="text-sm text-muted-foreground">
+          Concluído
+        </p>
+        <Progress value={100} aria-labelledby="progress-done" />
       </div>
     </div>
   ),

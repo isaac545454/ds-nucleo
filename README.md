@@ -123,7 +123,8 @@ No merge em `master`, o workflow:
 pnpm install
 pnpm run lint
 pnpm run typecheck
-pnpm test
+pnpm test          # unitários e acessibilidade
+pnpm run test:a11y  # só a suíte do axe
 pnpm run build      # gera dist/ (ESM + types + CSS)
 pnpm run storybook
 ```

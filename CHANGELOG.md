@@ -7,6 +7,14 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+### Added
+
+- Testes de acessibilidade com axe-core para cada componente. O CI roda essa suíte no check Acessibilidade, em paralelo com os testes unitários. Contraste de cor continua no painel do Storybook (`addon-a11y`), porque o jsdom não carrega o CSS do tema.
+
+### Fixed
+
+- Stories de Popover e Progress passam a expor um nome acessível. O conteúdo do popover é um diálogo, e a barra de progresso precisa de rótulo.
+
 ## [0.6.0] - 2026-10-12
 
 ### Added
