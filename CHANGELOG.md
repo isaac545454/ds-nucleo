@@ -11,6 +11,22 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 - `Badge` fica em pílula, maior e com anel vermelho. PR de teste do Chromatic: os snapshots devem divergir. Não mergear.
 
+## [0.5.2] - 2026-10-12
+
+### Added
+
+- Relatório de tree-shaking nos pull requests. O CI mede o bundle de cada export e falha se um export que já existia crescer mais de 20% e mais de 256 B, ou se o conjunto dos exports antigos crescer mais de 5%. A label `tree-shaking: accepted` aceita um aumento intencional.
+
+### Changed
+
+- O JavaScript publicado deixa de ser um arquivo único. Cada módulo sai separado, com `sideEffects` só no CSS, para o bundler de quem consome descartar o componente que não foi importado.
+
+## [0.5.1] - 2026-10-12
+
+### Changed
+
+- O Chromatic roda como último step do CI, depois do lint, dos testes e do build do Storybook.
+
 ## [0.5.0] - 2026-10-12
 
 ### Added

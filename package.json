@@ -1,6 +1,6 @@
 {
   "name": "@isaac545454/nucleus",
-  "version": "0.5.0",
+  "version": "0.5.2",
   "description": "Design system interno, baseado em shadcn/ui, publicado como pacote único.",
   "license": "UNLICENSED",
   "repository": {
@@ -11,6 +11,9 @@
     "registry": "https://npm.pkg.github.com"
   },
   "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
   "packageManager": "pnpm@10.24.0",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -28,7 +31,8 @@
     "tailwind-preset.js"
   ],
   "scripts": {
-    "build": "tsup && tailwindcss -i src/styles.css -o dist/styles.css --minify",
+    "build": "tsup && node scripts/rewrite-specifiers.mjs && tailwindcss -i src/styles.css -o dist/styles.css --minify",
+    "tree-shaking": "node scripts/tree-shaking.mjs",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
@@ -84,6 +88,7 @@
     "@vitest/coverage-v8": "^5.0.3",
     "autoprefixer": "^10.6.1",
     "chromatic": "^18.12.0",
+    "esbuild": "0.27.7",
     "eslint": "^10.12.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "jsdom": "^30.1.2",
