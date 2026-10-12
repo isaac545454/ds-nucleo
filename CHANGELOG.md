@@ -7,6 +7,10 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+### Changed
+
+- O step do Chromatic no CI fica comentado temporariamente.
+
 ## [0.4.1] - 2026-10-12
 
 ### Changed
