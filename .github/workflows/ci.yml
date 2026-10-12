@@ -77,8 +77,7 @@ jobs:
         with:
           fetch-depth: 0
       - uses: ./.github/actions/setup
-      # Pausado temporariamente.
-      # - name: Chromatic
-      #   uses: chromaui/action@v18
-      #   with:
-      #     projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+      - name: Chromatic
+        uses: chromaui/action@v18
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
