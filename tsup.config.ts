@@ -8,6 +8,7 @@ export default defineConfig({
     "!src/**/*.test.tsx",
     "!src/**/*.stories.ts",
     "!src/**/*.stories.tsx",
+    "!src/**/*.d.ts",
   ],
   format: ["esm"],
   dts: true,
