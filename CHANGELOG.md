@@ -7,6 +7,10 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+### Added
+
+- Recomendação para agentes usarem o Nucleus: convenção em `AGENTS.md` e catálogo nas stories, com o MCP do Storybook como próximo passo. Ver `docs/ai-rules-vs-mcp.md`.
+
 ## [0.5.3] - 2026-10-12
 
 ### Changed

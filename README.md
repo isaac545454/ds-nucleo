@@ -70,6 +70,8 @@ npm run storybook          # dev server em http://localhost:6006
 npm run build-storybook    # build estático em storybook-static/
 ```
 
+Agentes que forem usar o pacote seguem `AGENTS.md` (convenção) e leem o catálogo nas stories. A comparação com o MCP do Storybook está em [`docs/ai-rules-vs-mcp.md`](docs/ai-rules-vs-mcp.md).
+
 ## Chromatic
 
 Cada story vira um teste visual, fotografado nos temas light e dark. No CI, o workflow compara o snapshot com a baseline e só aceita mudanças em `master` automaticamente.
