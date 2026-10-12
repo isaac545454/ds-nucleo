@@ -19,6 +19,11 @@ const preview: Preview = {
       },
       pauseAnimationAtEnd: true,
     },
+    options: {
+      storySort: {
+        order: ["Foundations", "Forms", "Layout", "Overlays", "Feedback"],
+      },
+    },
   },
   globalTypes: {
     theme: {
