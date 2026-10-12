@@ -7,6 +7,10 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+### Added
+
+- Componente `Kbd` para mostrar teclas e atalhos.
+
 ### Changed
 
 - O CI passa a rodar lint, testes unitários e build em cada pull request e antes de publicar.
