@@ -1,0 +1,155 @@
+# Relatório de tree-shaking adaptado do CI de Hyan Mandian (brazilian-utils), MIT.
+# https://github.com/brazilian-utils/javascript/blob/main/.github/workflows/build.yml
+
+name: Tree-shaking
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review, labeled, unlabeled]
+  push:
+    branches: [master, main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  tree-shaking:
+    name: Tree-shaking report
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout head
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Instalar dependências
+        run: pnpm install --frozen-lockfile
+
+      - name: Checkout base
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@v4
+        with:
+          path: base
+          ref: ${{ github.event.pull_request.base.sha }}
+          persist-credentials: false
+
+      - name: Build da head
+        run: pnpm run build
+
+      - name: Medir a base
+        if: github.event_name == 'pull_request'
+        id: base
+        run: |
+          if [ ! -f base/scripts/tree-shaking.mjs ]; then
+            echo "measured=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          node scripts/tree-shaking.mjs --json head.json
+          (
+            cd base
+            pnpm install --frozen-lockfile
+            pnpm run build
+            node scripts/tree-shaking.mjs --json ../base.json --surviving ../head.json
+          )
+          echo "measured=true" >> "$GITHUB_OUTPUT"
+
+      - name: Comparar com a base
+        if: github.event_name == 'pull_request'
+        id: compare
+        continue-on-error: true
+        run: |
+          if [ "${{ steps.base.outputs.measured }}" = "true" ]; then
+            code=2
+            echo "code=$code" >> "$GITHUB_OUTPUT"
+            set +e
+            node scripts/tree-shaking.mjs --compare base.json --markdown tree-shaking.md
+            code=$?
+            set -e
+            case "$code" in 0 | 1) ;; *) code=2 ;; esac
+            echo "code=$code" >> "$GITHUB_OUTPUT"
+            exit "$code"
+          else
+            {
+              echo "## Tree-shaking report"
+              echo
+              echo "No base measurement available (the base branch has no \`scripts/tree-shaking.mjs\`, or an incompatible version). Showing head sizes only."
+              echo
+              printf '%s\n' "\`\`\`"
+              node scripts/tree-shaking.mjs
+              printf '%s\n' "\`\`\`"
+            } > tree-shaking.md
+          fi
+
+      - name: Marcar o comentário
+        if: github.event_name == 'pull_request'
+        run: |
+          if [ ! -f tree-shaking.md ]; then
+            printf '## Tree-shaking report\n\nThe measurement step failed before producing a report. See the job log.\n' > tree-shaking.md
+          fi
+          sed -i '1i<!-- tree-shaking-report -->' tree-shaking.md
+          if [ "${{ steps.compare.outputs.code }}" = "2" ]; then
+            printf '\n> The comparison itself failed (see the job log); the "tree-shaking: accepted" label does not cover this.\n' >> tree-shaking.md
+          elif [ "${{ steps.compare.outcome }}" = "failure" ]; then
+            if [ "${{ contains(github.event.pull_request.labels.*.name, 'tree-shaking: accepted') }}" = "true" ]; then
+              printf '\n> Regression accepted through the "tree-shaking: accepted" label.\n' >> tree-shaking.md
+            else
+              printf '\n> To accept an intentional size increase, add the "tree-shaking: accepted" label to this pull request.\n' >> tree-shaking.md
+            fi
+          fi
+
+      - name: Achar comentário existente
+        if: github.event_name == 'pull_request' && !github.event.pull_request.head.repo.fork
+        uses: peter-evans/find-comment@3eae4d37986fb5a8592848f6a574fdf654e61f9e # v3.1.0
+        id: find-comment
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: "github-actions[bot]"
+          body-includes: "<!-- tree-shaking-report -->"
+
+      - name: Publicar ou atualizar o comentário
+        if: github.event_name == 'pull_request' && !github.event.pull_request.head.repo.fork
+        uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4.0.0
+        with:
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          edit-mode: replace
+          body-path: tree-shaking.md
+
+      - name: Resumo para pull requests de fork
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork
+        run: cat tree-shaking.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Falhar em regressão
+        if: "${{ github.event_name == 'pull_request' && steps.compare.outcome == 'failure' && steps.compare.outputs.code != '2' && !contains(github.event.pull_request.labels.*.name, 'tree-shaking: accepted') }}"
+        run: exit 1
+
+      - name: Falhar quando a comparação não rodou
+        if: "${{ github.event_name == 'pull_request' && steps.compare.outputs.code == '2' }}"
+        run: exit 1
+
+      - name: Resumo no push
+        if: github.event_name == 'push'
+        run: |
+          {
+            echo "## Tree-shaking report"
+            echo
+            printf '%s\n' "\`\`\`"
+            node scripts/tree-shaking.mjs
+            printf '%s\n' "\`\`\`"
+          } >> "$GITHUB_STEP_SUMMARY"
