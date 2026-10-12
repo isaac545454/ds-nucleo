@@ -9,7 +9,7 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 ### Changed
 
-- `Badge` deixa de aplicar a variante visual. PR de teste do CI: os testes unitários devem falhar.
+- `Badge` fica em pílula, maior e com anel vermelho. PR de teste do Chromatic: os snapshots devem divergir. Não mergear.
 
 ## [0.5.0] - 2026-10-12
 
