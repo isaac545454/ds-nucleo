@@ -11,6 +11,12 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 - O step do Chromatic no CI fica comentado temporariamente.
 
+## [0.5.0] - 2026-10-12
+
+### Added
+
+- Componente `Kbd` para mostrar teclas e atalhos.
+
 ## [0.4.1] - 2026-10-12
 
 ### Changed

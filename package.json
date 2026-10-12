@@ -1,6 +1,6 @@
 {
   "name": "@isaac545454/nucleus",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Design system interno, baseado em shadcn/ui, publicado como pacote único.",
   "license": "UNLICENSED",
   "repository": {
