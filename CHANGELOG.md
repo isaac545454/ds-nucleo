@@ -7,6 +7,8 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+## [0.6.2] - 2026-10-12
+
 ### Added
 
 - Testes de acessibilidade com axe-core para cada componente. O CI roda essa suíte no check Acessibilidade, em paralelo com os testes unitários. Contraste de cor continua no painel do Storybook (`addon-a11y`), porque o jsdom não carrega o CSS do tema.
