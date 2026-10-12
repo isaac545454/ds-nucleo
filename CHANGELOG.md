@@ -12,6 +12,7 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 ### Changed
 
 - Lint, typecheck, testes, build, Storybook e Chromatic passam a ser checks separados e rodam em sequência. O Chromatic continua por último.
+- O step do Chromatic no CI fica comentado temporariamente.
 
 ## [0.5.2] - 2026-10-12
 
